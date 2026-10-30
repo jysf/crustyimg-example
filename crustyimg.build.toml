@@ -1,0 +1,24 @@
+# Every image the site serves, built by `crustyimg build` in pages.yml.
+# Each photo is written twice: in the smallest modern format crustyimg picks
+# (usually AVIF) and as a JPEG for browsers that can't show it.
+#
+# Guest photos are in guests.build.toml, because a target with no matching
+# files stops the build, and the guests folder can be empty.
+version = 1
+
+[[target]]
+source = "assets/photos/*.jpg"
+recipe = "recipes/portfolio.toml"
+out    = "_site/assets/photos"
+
+[[target]]
+source = "assets/photos/*.jpg"
+recipe = "recipes/portfolio.toml"
+out    = "_site/assets/photos"
+name   = "{stem}.jpg"
+
+[[target]]
+source = "assets/photos/hero.jpg"
+recipe = "recipes/social-card.toml"
+out    = "_site"
+name   = "social-card.jpg"

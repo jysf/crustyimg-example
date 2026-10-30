@@ -1,7 +1,7 @@
 name: site
 
-# Builds the site with crustyimg (resize + re-encode every photo) and deploys
-# it to GitHub Pages.
+# Builds the site's images with `crustyimg build` (see crustyimg.build.toml
+# and the recipes in recipes/) and deploys it to GitHub Pages.
 on:
   push:
     branches: [main]
@@ -23,29 +23,39 @@ jobs:
       - uses: actions/checkout@v4
       - uses: jysf/setup-crustyimg@v1
 
-      - name: Build the site
+      - name: Build the images
         run: |
           set -euo pipefail
-          mkdir -p _site/assets/photos/guests
-          cp index.html style.css site.js photos.json _site/
-          # Keep each photo's format so the links in photos.json still match,
-          # cap the longest side at 1600 px, and let crustyimg pick the encoder
-          # settings. Each folder is its own run because --out-dir flattens.
-          crustyimg optimize 'assets/photos/*' --profile preserve --max 1600 \
-            --out-dir _site/assets/photos -y
-          # The guests folder may hold no photos yet (only .gitkeep).
+          crustyimg build
+          # The guests folder may hold no photos yet (only .gitkeep), and a
+          # build target with nothing to match stops the build.
           if [ -n "$(find assets/photos/guests -maxdepth 1 -type f ! -name .gitkeep)" ]; then
-            crustyimg optimize 'assets/photos/guests/*' --profile preserve --max 1600 \
-              --out-dir _site/assets/photos/guests -y
+            crustyimg build guests.build.toml
           fi
+
+      - name: Assemble the site
+        run: |
+          set -euo pipefail
+          cp index.html style.css site.js _site/
+          ./scripts/record-modern-formats.sh
           {
             echo "### Photo sizes"
-            echo '| Photo | Source | Deployed |'
-            echo '|---|---|---|'
-            find assets/photos -type f ! -name .gitkeep | sort | while IFS= read -r f; do
-              out="_site/${f}"
-              echo "| ${f#assets/photos/} | $(wc -c < "$f") B | $(wc -c < "$out") B |"
-            done
+            echo ""
+            echo "Each photo is served in the format crustyimg picked, with a JPEG fallback."
+            echo ""
+            echo '| Photo | Source | JPEG fallback | Served | Format |'
+            echo '|---|---|---|---|---|'
+            kb() { echo "$(( ($(wc -c < "$1") + 512) / 1024 )) KB"; }
+            # One line per photo: its folder, source file, and modern file
+            # (or "-" when there is only the JPEG).
+            jq -r '(.hero | ["assets/photos", .file, (.modern // "-")]), (.gallery[] | ["assets/photos", .file, (.modern // "-")]), (.guests[] | ["assets/photos/guests", .file, (.modern // "-")]) | join(" ")' _site/photos.json > "$RUNNER_TEMP/photos.txt"
+            while read -r dir file modern; do
+              fallback="_site/${dir}/${file%.*}.jpg"
+              served="$fallback"; [ "$modern" != "-" ] && served="_site/${dir}/${modern}"
+              name="${dir}/${file}"
+              echo "| ${name#assets/photos/} | $(kb "${dir}/${file}") | $(kb "$fallback") | $(kb "$served") | ${served##*.} |"
+            done < "$RUNNER_TEMP/photos.txt"
+            echo "| social-card.jpg (link previews) | | | $(kb _site/social-card.jpg) | jpg |"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-pages-artifact@v3

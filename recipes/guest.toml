@@ -1,0 +1,16 @@
+# Guest photos: the same web-ready steps, without Mr. Whiskers' signature.
+# They aren't his photos.
+version = "1"
+name = "guest"
+description = "Upright, 1600 px, smallest modern format."
+
+[[step]]
+op = "auto-orient"
+
+[[step]]
+op = "resize"
+mode = "max"
+width = 1600
+
+[[step]]
+op = "optimize"

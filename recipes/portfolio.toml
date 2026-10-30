@@ -1,0 +1,38 @@
+# Mr. Whiskers' own photos: the same steps as crustyimg's bundled `web`
+# recipe (turn upright, shrink, pick the smallest modern format), at this
+# site's 1600 px width, plus a small signature.
+version = "1"
+name = "portfolio"
+description = "Upright, 1600 px, signed, smallest modern format."
+
+[[step]]
+op = "auto-orient"
+
+[[step]]
+op = "resize"
+mode = "max"
+width = 1600
+
+# The signature is drawn twice: a dark copy 2 px lower, then white on top,
+# so it reads on light fur and dark leaves alike. Bottom center, because
+# the gallery crops photos to squares and would cut off a corner.
+[[step]]
+op = "watermark"
+text = "© Mr. Whiskers"
+size = 30
+color = "000000"
+opacity = 0.6
+gravity = "south"
+margin = 22
+
+[[step]]
+op = "watermark"
+text = "© Mr. Whiskers"
+size = 30
+color = "ffffff"
+opacity = 0.9
+gravity = "south"
+margin = 24
+
+[[step]]
+op = "optimize"

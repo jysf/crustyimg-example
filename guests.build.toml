@@ -1,0 +1,14 @@
+# Guest photos, built like the portfolio photos but without the signature.
+# pages.yml runs this only when assets/photos/guests/ holds a photo.
+version = 1
+
+[[target]]
+source = "assets/photos/guests/*"
+recipe = "recipes/guest.toml"
+out    = "_site/assets/photos/guests"
+
+[[target]]
+source = "assets/photos/guests/*"
+recipe = "recipes/guest.toml"
+out    = "_site/assets/photos/guests"
+name   = "{stem}.jpg"

@@ -19,7 +19,7 @@ check_list() {
     f="$(basename "$path")"
     case "$f" in
       .gitkeep) continue ;;
-      hero.jpg) [ "$key" = gallery ] && continue ;;  # the hero is set in index.html
+      hero.jpg) [ "$key" = gallery ] && continue ;;  # listed under "hero"
       *.jpg|*.jpeg|*.png|*.webp) ;;
       *) err "$path" "use a .jpg, .jpeg, .png or .webp file (browsers can't show every format)"; continue ;;
     esac

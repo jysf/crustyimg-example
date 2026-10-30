@@ -1,4 +1,8 @@
 {
+  "hero": {
+    "file": "hero.jpg",
+    "alt": "Mr. Whiskers, looking unimpressed"
+  },
   "gallery": [
     {
       "file": "gallery-1.jpg",

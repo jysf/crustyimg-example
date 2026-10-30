@@ -10,17 +10,42 @@
     return;
   }
 
+  // A <picture> that offers the modern format crustyimg picked (usually
+  // AVIF) and falls back to the JPEG the build always writes alongside it.
+  function picture(entry, dir) {
+    const base = "assets/photos/" + dir;
+    const pic = document.createElement("picture");
+    if (entry.modern) {
+      const source = document.createElement("source");
+      source.srcset = base + entry.modern;
+      source.type = "image/" + entry.modern.split(".").pop();
+      pic.append(source);
+    }
+    const img = document.createElement("img");
+    img.src = base + entry.file.replace(/\.[^.]+$/, ".jpg");
+    img.alt = entry.alt || "";
+    if (entry.position) img.style.objectPosition = entry.position;
+    pic.append(img);
+    return pic;
+  }
+
   function figure(entry, dir) {
     const fig = document.createElement("figure");
-    const img = document.createElement("img");
-    img.src = "assets/photos/" + dir + entry.file;
-    img.alt = entry.alt || "";
-    img.loading = "lazy";
-    if (entry.position) img.style.objectPosition = entry.position;
+    const pic = picture(entry, dir);
+    pic.querySelector("img").loading = "lazy";
     const cap = document.createElement("figcaption");
     cap.textContent = entry.caption || "";
-    fig.append(img, cap);
+    fig.append(pic, cap);
     return fig;
+  }
+
+  // The hero is in the HTML so it shows before this script runs; swap in
+  // the modern format once we know its name.
+  const heroImg = document.querySelector(".hero__photo img");
+  if (data.hero && data.hero.modern && heroImg) {
+    const pic = picture(data.hero, "");
+    pic.querySelector("img").width = heroImg.width;
+    heroImg.replaceWith(pic);
   }
 
   const gallery = document.getElementById("gallery");

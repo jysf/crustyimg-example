@@ -1,0 +1,25 @@
+# The picture shown when someone shares the site on social media or in
+# chat: exactly 1200 x 630 with a caption. Pinned to JPEG, because link
+# previews don't show AVIF.
+version = "2"
+name = "social-card"
+description = "1200x630 link-preview card with a caption, as JPEG."
+format = "jpeg"
+quality = 85
+
+[[step]]
+op = "auto-orient"
+
+[[step]]
+op = "resize"
+mode = "fill"
+width = 1200
+height = 630
+
+[[step]]
+op = "watermark"
+text = "Mr. Whiskers · available for naps"
+size = 40
+color = "ffffff"
+gravity = "southwest"
+margin = 40

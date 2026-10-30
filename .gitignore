@@ -2,3 +2,6 @@ _incoming/
 _site/
 .DS_Store
 *.sarif
+.crustyimg/
+crustyimg.build.lock
+guests.build.lock

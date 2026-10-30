@@ -1,0 +1,29 @@
+name: image lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # The setup most people will copy: lint every image on each PR and annotate
+  # findings on the changed files.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jysf/crustyimg-action@v1
+        with:
+          paths: assets/**/*
+
+  # Every photo file must be listed in photos.json (or it won't show on the
+  # site) and every entry must point at a real file.
+  photos-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/check-photos.sh

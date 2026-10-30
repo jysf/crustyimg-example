@@ -1,0 +1,7 @@
+# Lint images before they're committed: `pip install pre-commit && pre-commit install`.
+repos:
+  - repo: https://github.com/jysf/crustyimg
+    rev: v0.8.0
+    hooks:
+      - id: crustyimg-lint
+        exclude: ^canary/   # the canary image is broken on purpose

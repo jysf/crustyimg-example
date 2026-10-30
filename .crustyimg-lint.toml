@@ -1,0 +1,6 @@
+# Image rules for this site. Every photo must fit a 1 MB budget and is shown at
+# most 1600 px wide, so anything wider is flagged too.
+[[budget]]
+glob = "assets/**/*"
+max_bytes = 1000000
+max_intended_width = 1600

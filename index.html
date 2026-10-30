@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mr. Whiskers — Portfolio</title>
+  <meta name="description" content="The professional portfolio of Mr. Whiskers, cat. Available for naps. Images linted and optimized in CI with crustyimg.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="./">Mr. Whiskers</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#guests">Guest stars</a>
+      <a href="#services">Services</a>
+      <a href="#rejected">Rejected shots</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">Portfolio · est. whenever I felt like it</p>
+        <h1>Professional cat.<br>Available for naps.</h1>
+        <p class="lead">Ten years' experience sitting on keyboards, knocking things off tables, and
+          staring at walls that contain nothing. References available on request, and ignored.</p>
+      </div>
+      <figure class="hero__photo">
+        <img src="assets/photos/hero.jpg" alt="Mr. Whiskers, looking unimpressed" width="1600" height="1200">
+      </figure>
+    </section>
+
+    <section id="work" class="work">
+      <h2>Selected work</h2>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section id="guests" class="guests">
+      <h2>Guest stars</h2>
+      <p>Cats from around the internet, sent in as pull requests. Every photo goes through the same
+        checks as mine before it can be merged, so if your phone tucked your location into the file,
+        crustyimg will catch it and tell you how to remove it.
+        <a href="https://github.com/jysf/crustyimg-example/blob/main/CONTRIBUTING.md">Submit your cat.</a></p>
+      <p id="guests-empty" class="empty">No guest stars yet. Yours could be the first.</p>
+      <div class="gallery" id="guest-gallery"></div>
+    </section>
+
+    <section id="services" class="services">
+      <h2>Services</h2>
+      <ul>
+        <li><strong>Napping</strong> — on-site, any surface, especially the one you were about to use.</li>
+        <li><strong>Keyboard QA</strong> — thorough testing of every key, simultaneously: jjjjjjjjjjjjjjjj</li>
+        <li><strong>Gravity audits</strong> — I check whether things on tables still fall. They do.</li>
+        <li><strong>Judging</strong> — silent, continuous, free of charge.</li>
+      </ul>
+    </section>
+
+    <section id="rejected" class="rejected">
+      <h2>Rejected shots</h2>
+      <p>Some of my work did not make it past the image linter. Every photo on this site is checked
+        by <a href="https://github.com/jysf/crustyimg">crustyimg</a> before it goes live, and these four
+        were turned away. You can watch it happen in the
+        <a href="https://github.com/jysf/crustyimg-example/pull/1">open pull request</a>, where each problem is
+        flagged right on the file.</p>
+      <table>
+        <thead><tr><th>Photo</th><th>What crustyimg said</th><th>My statement</th></tr></thead>
+        <tbody>
+          <tr><td><code>headshot.jpg</code></td><td>Error: GPS location in a public image</td><td>It revealed my secret nap spot. I have moved.</td></tr>
+          <tr><td><code>hero-loaf.jpg</code></td><td>Error: over the 1 MB size budget</td><td>I contain multitudes.</td></tr>
+          <tr><td><code>sunbeam.jpg</code></td><td>Warning: photo is stored sideways</td><td>It is accurate. That is how I lie.</td></tr>
+          <tr><td><code>hairball.jpg</code></td><td>Error: not a readable image</td><td>…</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Mr. Whiskers is a working cat. This site is a live demo of the
+      <a href="https://github.com/marketplace/actions/crustyimg">crustyimg GitHub Action</a>: every
+      photo is linted on each pull request and optimized on deploy.
+      <a href="https://github.com/jysf/crustyimg-example">See how it's built.</a></p>
+  </footer>
+  <script src="site.js" defer></script>
+</body>
+</html>

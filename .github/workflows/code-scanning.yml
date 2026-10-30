@@ -1,0 +1,30 @@
+name: code scanning
+
+# Sends lint findings to the repo's Security tab as SARIF, using the generic
+# installer and the CLI directly.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  sarif:
+    # GitHub withholds the Security-tab write permission from pull requests
+    # opened from forks, so the upload can only run on this repo's own
+    # branches. Fork PRs are still checked by the image lint workflow.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jysf/setup-crustyimg@v1
+      - name: Lint to SARIF
+        run: crustyimg lint 'assets/**/*' --format sarif > crustyimg.sarif
+        continue-on-error: true   # let the upload run even when findings fail the gate
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: crustyimg.sarif
+          category: crustyimg

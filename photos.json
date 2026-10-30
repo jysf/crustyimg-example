@@ -1,0 +1,11 @@
+{
+  "gallery": [
+    { "file": "gallery-1.jpg", "caption": "Untitled (Loaf), 2025", "alt": "Mr. Whiskers curled into a loaf on a garden wall", "position": "75% 50%" },
+    { "file": "gallery-2.jpg", "caption": "Study in Disdain", "alt": "Close-up of Mr. Whiskers with eyes half shut" },
+    { "file": "gallery-3.jpg", "caption": "My Associate, Unconvinced", "alt": "A brown tabby cat staring into the camera" },
+    { "file": "gallery-4.jpg", "caption": "Portrait of the Artist Ignoring You", "alt": "The tabby with eyes nearly closed" },
+    { "file": "gallery-5.jpg", "caption": "Exit, Stage Left", "alt": "A tail disappearing over the top of a white fence" },
+    { "file": "gallery-6.jpg", "caption": "Sunbeam No. 47", "alt": "Mr. Whiskers lifting his face to the sun among leaves" }
+  ],
+  "guests": []
+}

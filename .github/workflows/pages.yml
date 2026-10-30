@@ -1,0 +1,63 @@
+name: site
+
+# Builds the site with crustyimg (resize + re-encode every photo) and deploys
+# it to GitHub Pages.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jysf/setup-crustyimg@v1
+
+      - name: Build the site
+        run: |
+          set -euo pipefail
+          mkdir -p _site/assets/photos/guests
+          cp index.html style.css site.js photos.json _site/
+          # Keep each photo's format so the links in photos.json still match,
+          # cap the longest side at 1600 px, and let crustyimg pick the encoder
+          # settings. Each folder is its own run because --out-dir flattens.
+          crustyimg optimize 'assets/photos/*' --profile preserve --max 1600 \
+            --out-dir _site/assets/photos -y
+          # The guests folder may hold no photos yet (only .gitkeep).
+          if [ -n "$(find assets/photos/guests -maxdepth 1 -type f ! -name .gitkeep)" ]; then
+            crustyimg optimize 'assets/photos/guests/*' --profile preserve --max 1600 \
+              --out-dir _site/assets/photos/guests -y
+          fi
+          {
+            echo "### Photo sizes"
+            echo '| Photo | Source | Deployed |'
+            echo '|---|---|---|'
+            find assets/photos -type f ! -name .gitkeep | sort | while IFS= read -r f; do
+              out="_site/${f}"
+              echo "| ${f#assets/photos/} | $(wc -c < "$f") B | $(wc -c < "$out") B |"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

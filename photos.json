@@ -34,6 +34,26 @@
       "file": "gallery-6.jpg",
       "caption": "Sunbeam No. 47",
       "alt": "Mr. Whiskers lifting his face to the sun among leaves"
+    },
+    {
+      "file": "headshot.jpg",
+      "caption": "Headshot (Location Withheld)",
+      "alt": "The tabby looking straight at the camera"
+    },
+    {
+      "file": "hero-loaf.jpg",
+      "caption": "Loaf, Uncompressed",
+      "alt": "Mr. Whiskers loafing, seen from behind"
+    },
+    {
+      "file": "sunbeam.jpg",
+      "caption": "Sunbeam No. 48",
+      "alt": "Mr. Whiskers in the sun among leaves"
+    },
+    {
+      "file": "hairball.jpg",
+      "caption": "Hairball (Mixed Media)",
+      "alt": "Nothing. It is a hairball."
     }
   ],
   "guests": []

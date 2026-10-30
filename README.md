@@ -58,6 +58,8 @@ Send a photo of your cat as a pull request and it joins the **Guest stars** sect
 you. It goes through the same checks as every photo here, so if your phone saved where it was
 taken, you'll find out. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+To add photos or change the site yourself, see [MAINTAINING.md](MAINTAINING.md).
+
 ## Use it in your repo
 
 The core of it is three lines in a workflow:

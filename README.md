@@ -52,6 +52,9 @@ A directory in `paths` covers only the images directly inside it; use a glob lik
 to include subfolders. Size budgets and rule settings go in a
 [`.crustyimg-lint.toml`](.crustyimg-lint.toml).
 
+For the full walkthrough (budgets, required checks, pull requests from forks, fixing findings),
+see the [GitHub Actions guide](https://github.com/jysf/crustyimg/blob/main/docs/github-actions.md).
+
 ## About the photos
 
 The photos are of real cats and are not covered by the code license. The GPS coordinates in the

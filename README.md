@@ -12,7 +12,7 @@ tries to add four new photos, and each one has a problem crustyimg flags right o
 | Photo | Finding | Why it matters |
 |---|---|---|
 | `headshot.jpg` | **error** `privacy/gps-metadata-leak` | The photo carries GPS coordinates, which would publish where it was taken. |
-| `hero-loaf.jpg` | **error** `size/oversized-bytes` | Far over this site's 1 MB budget (`.crustyimg-lint.toml`). |
+| `hero-loaf.jpg` | **error** `size/oversized-bytes`, **warn** `dims/oversized-dimensions` | A 4 MB, 4608 px camera original, far over this site's 1 MB budget and 1600 px width (`.crustyimg-lint.toml`). |
 | `sunbeam.jpg` | **warn** `orient/orientation-not-baked` | Stored sideways and rotated only by a metadata flag, which some viewers ignore. |
 | `hairball.jpg` | **error** `size/truncated-or-corrupt` | Not a readable image at all. |
 

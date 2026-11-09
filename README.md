@@ -4,7 +4,7 @@ A small, real website that uses the [crustyimg](https://github.com/jysf/crustyim
 the way you would in your own repo. It's the portfolio of Mr. Whiskers, a cat who is available
 for naps, with help from an associate.
 
-**Live site:** https://jysf.github.io/crustyimg-example/
+**Live site:** https://mrwhiskers.jysf.org/
 
 **See the linter catch problems:** [pull request #1](https://github.com/jysf/crustyimg-example/pull/1)
 tries to add four new photos, and each one has a problem crustyimg flags right on the file:

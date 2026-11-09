@@ -1,7 +1,7 @@
 # Submit your cat
 
 Guest stars are welcome. Send a photo of your cat as a pull request, and once it's reviewed and
-merged it appears in the [Guest stars](https://jysf.github.io/crustyimg-example/#guests) section
+merged it appears in the [Guest stars](https://mrwhiskers.jysf.org/#guests) section
 with credit to you.
 
 This repo is a live demo of [crustyimg](https://github.com/jysf/crustyimg), an image linter, so
